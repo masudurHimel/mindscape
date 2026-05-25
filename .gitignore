@@ -8,4 +8,5 @@ build/
 .next/
 .turbo/
 .vercel/
+.idea/
 
