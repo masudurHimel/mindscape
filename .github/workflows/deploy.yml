@@ -5,12 +5,11 @@ on:
     branches: [master]
   pull_request:
 
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
     steps:
       - uses: actions/checkout@v4
 
@@ -26,6 +25,9 @@ jobs:
 
       - name: Link or create Vercel project
         run: vercel link --yes --project=mindscape --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Export VERCEL_PROJECT_ID
+        run: echo "VERCEL_PROJECT_ID=$(node -p "require('./.vercel/project.json').projectId")" >> $GITHUB_ENV
 
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=${{ github.ref == 'refs/heads/master' && 'production' || 'preview' }} --token=${{ secrets.VERCEL_TOKEN }}
