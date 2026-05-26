@@ -10,7 +10,7 @@ export const tutors: Tutor[] = [
   },
   {
     id: 'tutor-2',
-    name: 'Md. Shams Arefix Rizwan',
+    name: 'Md. Shams Arefin Rizwan',
     initials: 'SR',
     subjects: ['English', 'ICT'],
     bio: 'BSc\nBangladesh Agricultural University (BAU)',
